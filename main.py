@@ -26,19 +26,18 @@ async def process_file(file: UploadFile = File(...)):
 
     try:
         # 3. Execute your binary.
-        # IMPORTANT: Your binary MUST be a Linux executable (see warning below).
-        # This replicates: ./binaryfilename < example.txt > out.txt
         with tempfile.NamedTemporaryFile(delete=False, suffix=".txt") as tmp_input:
             tmp_input.write(input_content)
             input_path = tmp_input.name
         
-        # Run the command using shell redirection (simplest way to replicate your exact command)
-        # Ensure 'your_binary_name' is in the same directory and has execute permissions.
-        subprocess.run(
+        # ADDED: stderr=subprocess.PIPE and text=True to capture the binary's actual output text
+        result = subprocess.run(
             f"./network_tool < {input_path} > {output_path}",
             shell=True,
             check=True,
-            executable="/bin/bash"
+            executable="/bin/bash",
+            stderr=subprocess.PIPE,
+            text=True
         )
         
         # 4. Read the generated output file
@@ -51,6 +50,13 @@ async def process_file(file: UploadFile = File(...)):
             media_type="application/octet-stream",
             headers={"Content-Disposition": "attachment; filename=out.txt"}
         )
+        
+    except subprocess.CalledProcessError as e:
+        # UPDATED: If the binary prints an error message, surface that instead of just "exit status 1"
+        binary_error = e.stderr.strip() if e.stderr else str(e)
+        return Response(content=f"Binary Error: {binary_error}", status_code=500)
+    except Exception as e:
+        return Response(content=f"Server error: {str(e)}", status_code=500)
         
     except subprocess.CalledProcessError as e:
         return Response(content=f"Processing failed: {str(e)}", status_code=500)
