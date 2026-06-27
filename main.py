@@ -71,10 +71,10 @@ async def process_files(
         zip_buffer = io.BytesIO()
         with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zipf:
             # Add out.txt
-            zipf.writestr("out.txt", out_content)
+            zipf.writestr("Network.txt", out_content)
             # Add finalout.txt
             with open(final_output_path, "rb") as f:
-                zipf.writestr("finalout.txt", f.read())
+                zipf.writestr("Result.txt", f.read())
 
         zip_buffer.seek(0)
 
