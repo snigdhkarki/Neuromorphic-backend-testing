@@ -33,6 +33,79 @@ While the official TENNLab framework provides robust Command Line Interface (CUI
 * **Containerization:** Docker (compiles and packages the C++ framework dependencies flawlessly)
 * **Deployment:** Render
 
+<h2> Local Development </h2>
+
+If you want to make changes to the code, follow these steps to run the repository locally:
+
+### 1. Fork and Clone
+
+* **Fork** the repository https://github.com/snigdhkarki/Neuromorphic-Processor-UI to your own GitHub account.
+* Clone your forked repository to your local machine:
+```bash
+git clone https://github.com/snigdhkarki/Neuromorphic-Processor-UI
+```
+
+### 2. Running the Pages
+The project is divided into 4 distinct folders, each representing a page of the website. To run a specific page:
+
+Navigate into any of the four project folders:
+
+```bash
+cd folder-name
+```
+Install the dependencies (if you haven't already):
+
+```bash
+npm install
+```
+Start the local development server:
+
+```bash
+npm start
+```
+Note: Repeat this process inside any of the other folders to spin up the respective pages of the website.
+
+### 3. To Run the Backend Locally
+Follow these steps to get your local development server up and running.
+
+Prerequisites
+Before you begin, ensure you have Python 3.8+ and pip installed on your machine.
+
+Clone the Repository
+Clone the backend repository https://github.com/snigdhkarki/Neuromorphic-backend-testing to your local machine
+
+```Bash
+git clone https://github.com/snigdhkarki/Neuromorphic-backend-testing
+```
+
+Set Up a Virtual Environment (Recommended)
+It is highly recommended to use a virtual environment to isolate your project dependencies:
+
+```Bash
+# Create a virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+# On Linux/macOS:
+source venv/bin/activate
+# On Windows:
+.\venv\Scripts\activate
+```
+
+Install Dependencies
+Install the required packages before running the server:
+
+```Bash
+pip install -r requirements.txt
+```
+
+Run the Application
+Start the local FastAPI development server using Uvicorn with auto-reload enabled:
+
+```Bash
+uvicorn main:app --reload
+```
+
 This image shows the main landing page of the RISP Neuroprocessor dashboard outlining a clear three-step workflow for network design, input generation, and simulation.
 <img width="940" height="649" alt="image" src="https://github.com/user-attachments/assets/296dac42-3b9f-43bc-a7c1-0f3295b89c71" />
 
