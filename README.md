@@ -1,4 +1,4 @@
-<h1>TENNLab RISP GUI Simulator</h1>
+<h1>RISP GUI Simulator</h1>
 
 An open-source, interactive web-based Graphical User Interface (GUI) simulator for the RISP Neuroprocessor, built on top of the TENNLab Exploratory Neuromorphic Framework.
 
